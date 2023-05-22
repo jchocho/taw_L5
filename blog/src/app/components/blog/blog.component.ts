@@ -1,5 +1,6 @@
-import {Component, OnInit, EventEmitter, Output} from '@angular/core';
-import {DataService} from '../../services/data.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {DataService} from "../../services/data.service";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'blog',
@@ -7,20 +8,20 @@ import {DataService} from '../../services/data.service';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
-
-  public items$: any;
-
+  @Input() filterText: string = '';
+  public items$: any
   constructor(private service: DataService) {
-
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getAll();
   }
 
-  getAll() {
+  getAll(): void {
     this.service.getAll().subscribe(response => {
-      this.items$ = response;
+      this.items$ = response
     });
   }
+
+  protected readonly filter = filter;
 }

@@ -1,3 +1,6 @@
-
+/blog/.angular
+/blog/.idea
+/blog/.vscode
+/blog/node_modules
 /node_modules
 /.idea
