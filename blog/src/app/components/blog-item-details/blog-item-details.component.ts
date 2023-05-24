@@ -1,32 +1,31 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {DataService} from "../../services/data.service";
+import {DataService} from 'src/app/services/data.service';
+import DataModel from "../../models/data-model";
 
 @Component({
   selector: 'blog-item-details',
   templateUrl: './blog-item-details.component.html',
-  styleUrls: ['./blog-item-details.component.css']
+  styleUrls: ['./blog-item-details.component.css'],
 })
 export class BlogItemDetailsComponent implements OnInit {
-
-  public image: string = '';
-  public text: string = '';
+  public image: string =
+    'http://osnews.pl/wp-content/uploads/2016/06/it-grafika.jpg';
+  public text: string = 'Tytuł';
 
   constructor(private service: DataService, private route: ActivatedRoute) {
   }
 
-
-  ngOnInit() {
+  ngOnInit(): void {
     let id: string = '';
-    this.route.paramMap
-      .subscribe((params: any) => {
-        id = params.get('id');
-      });
+    this.route.paramMap.subscribe((params: any) => {
+      id = params.get('id');
+    });
 
-    this.service.getById(id).subscribe((res: any) => {
+    this.service.getById(id).subscribe((res: DataModel) => {
+      console.log('data', res);
       this.image = res['image'];
       this.text = res['text'];
     });
-
   }
 }

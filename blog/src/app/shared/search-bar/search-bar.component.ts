@@ -6,12 +6,13 @@ import {Router, ActivatedRoute} from "@angular/router";
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css']
 })
-export class SearchBarComponent implements OnInit{
+export class SearchBarComponent implements OnInit {
   public filterText: string = '';
 
   @Output() name = new EventEmitter<string>();
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -21,9 +22,12 @@ export class SearchBarComponent implements OnInit{
   }
 
   sendFilter(): void {
-    this.router.navigate(['/'], {
-      queryParams: {name: this.filterText}
-    });
     this.name.emit(this.filterText);
+    this.router.navigate(['/blog'], {
+      queryParams: {
+        name:
+        this.filterText
+      }
+    });
   }
 }

@@ -1,16 +1,18 @@
+import {Observable} from 'rxjs';
 import {Component, Input, OnInit} from '@angular/core';
-import {DataService} from "../../services/data.service";
-import {filter} from "rxjs";
+import {DataService} from 'src/app/services/data.service';
+import DataModel from "../../models/data-model";
 
 @Component({
   selector: 'blog',
   templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.css']
+  styleUrls: ['./blog.component.css'],
 })
 export class BlogComponent implements OnInit {
   @Input() filterText: string = '';
-  public items$: any
-  constructor(private service: DataService) {
+  public items$!: DataModel[];
+
+  constructor(private dataService: DataService) {
   }
 
   ngOnInit(): void {
@@ -18,10 +20,9 @@ export class BlogComponent implements OnInit {
   }
 
   getAll(): void {
-    this.service.getAll().subscribe(response => {
-      this.items$ = response
+    this.dataService.getAll().subscribe((data) => {
+      this.items$ = data;
+      console.log(data);
     });
   }
-
-  protected readonly filter = filter;
 }
