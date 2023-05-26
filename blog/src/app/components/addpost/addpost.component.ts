@@ -3,9 +3,9 @@ import {Router} from '@angular/router';
 import {DataService} from 'src/app/services/data.service';
 
 @Component({
-  selector: 'app-addpost',
+  selector: 'addpost',
   templateUrl: './addpost.component.html',
-  styleUrls: ['./addpost.component.scss'],
+  styleUrls: ['./addpost.component.css'],
 })
 export class AddpostComponent implements OnInit {
   public post = {

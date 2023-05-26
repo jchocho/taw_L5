@@ -9,23 +9,23 @@ import DataModel from "../../models/data-model";
   styleUrls: ['./blog-item-details.component.css'],
 })
 export class BlogItemDetailsComponent implements OnInit {
-  public image: string =
-    'http://osnews.pl/wp-content/uploads/2016/06/it-grafika.jpg';
-  public text: string = 'Tytuł';
+  public image: string = '';
+  public text: string = '';
+  public title: string = '';
 
   constructor(private service: DataService, private route: ActivatedRoute) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     let id: string = '';
     this.route.paramMap.subscribe((params: any) => {
       id = params.get('id');
     });
 
     this.service.getById(id).subscribe((res: DataModel) => {
-      console.log('data', res);
       this.image = res['image'];
       this.text = res['text'];
+      this.title = res['title'];
     });
   }
 }
